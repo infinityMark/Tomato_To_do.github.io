@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+HK&display=swap" rel="stylesheet">
+    <title>---番茄钟---</title>
+
+    <style>
+        body{
+            font-family: 'Ma Shan Zheng', cursive;
+            font-family: 'Noto Sans HK', sans-serif;
+            font-family: 'VT323', monospace;
+        }
+        h1{
+            text-align: center;
+        }
+        .selection_list{
+            text-align: center;
+        }
+        hr{
+            width: 500px;
+            height: 10px;
+            background-color: blue;
+            border: 3px solid #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <br>
+    <div class="head_word">
+        <h1 class="choose">Selection</h1>
+    </div>
+    <hr>
+    <br>
+    <div class="selection_list">
+        <br>
+        <h2 class="selection_lists" onload="showtime()">Longterm-30min</h2>
+        <br>
+        <h2 class="selection_lists">Shorterm-20min</h2>
+        <audio controls="" autoplay="" id="music" style="display: none;">
+            <source src="https://github.com/infinityMark/-infinityMark.github.io/blob/main/weeknds-122592%203%202.mp3?raw=true" type="audio/mpeg">
+        </audio>
+    </div>
+    <script>
+        let selection_lists = document.getElementsByClassName("selection_lists")
+        let choose = document.getElementsByClassName("choose")
+        let body = document.getElementById("body")
+        let music = document.getElementById("music")
+
+        function thirty_minters(){
+                let nowtime = new Date()
+                // alert(nowtime)
+                let maybe = nowtime.getHours()
+                let minters_pp = parseInt(nowtime.getMinutes())
+                let showtime = function(){
+                    choose[0].innerText = "Studying"
+                    // let nowtime = new Date()
+                    //获取当前时间
+                    if(minters_pp+30>=60){
+                        maybe = maybe + 1
+                        minters_pp = minters_pp - 60
+                    }
+                    let the_time = new Date()
+                    let stratime = new Date(`2023/12/${(nowtime.getDay())+12} ${(nowtime.getHours())}:${(the_time.getMinutes())}:${(the_time.getSeconds())}`)
+                    let endtime = new Date(`2023/12/${(nowtime.getDay())+12} ${(maybe)}:${minters_pp}:${(nowtime.getSeconds())}`);  //定义结束时间
+                    let lefttime = endtime.getTime()-stratime.getTime(),  //距离结束时间的毫秒数
+                        // leftd = Math.floor(lefttime/(1000*60*60*24)),  //计算天数
+                        // lefth = Math.floor(lefttime/(1000*60*60)%24),  //计算小时数
+                        leftm = Math.floor(lefttime/(1000*60)%60),  //计算分钟数
+                        lefts = Math.floor(lefttime/1000%60);  //计算秒数
+                    return leftm + ":" + lefts;  //返回倒计时的字符串
+                }
+                // let stratime = new Date(`2023/12/${(nowtime.getDay())+12} ${(nowtime.getHours())}:${(nowtime.getMinutes())}:${(nowtime.getSeconds())}`)
+                // let endtime = new Date(`2023/12/${(nowtime.getDay())+12} ${(nowtime.getHours())}:${(nowtime.getMinutes()+5)}:${(nowtime.getSeconds())}`);  //定义结束时间
+                // let thon = 1000
+                // let end = showtime()=="29:50"
+                setInterval(function(){
+                    // if(showtime()=="29:50"){
+                    //     clearInterval()
+                    // }
+                    selection_lists[0].innerHTML = showtime()
+                    // console.log(showtime().stratime)
+                },1000)
+            }
+        
+        
+        selection_lists[0].addEventListener("click",function(){
+            setTimeout(function(){
+                // alert("hello")
+                music.play()
+            },5000)
+            thirty_minters()
+
+            // let nowtime = new Date()
+            // // alert(nowtime)
+            // let showtime = function(){
+            //     choose[0].innerText = "Relax"
+            //     // let nowtime = new Date()
+            //     //获取当前时间
+            //     let the_time = new Date()
+            //     let stratime = new Date(`2023/12/${(nowtime.getDay())+12} ${(nowtime.getHours())}:${(the_time.getMinutes())}:${(the_time.getSeconds())}`)
+            //     let endtime = new Date(`2023/12/${(nowtime.getDay())+12} ${(nowtime.getHours())}:${(nowtime.getMinutes()+5)}:${(nowtime.getSeconds())}`);  //定义结束时间
+            //     let lefttime = endtime.getTime()-stratime.getTime(),  //距离结束时间的毫秒数
+            //         // leftd = Math.floor(lefttime/(1000*60*60*24)),  //计算天数
+            //         // lefth = Math.floor(lefttime/(1000*60*60)%24),  //计算小时数
+            //         leftm = Math.floor(lefttime/(1000*60)%60),  //计算分钟数
+            //         lefts = Math.floor(lefttime/1000%60);  //计算秒数
+            //     return leftm + ":" + lefts;  //返回倒计时的字符串
+            // }
+            // // let stratime = new Date(`2023/12/${(nowtime.getDay())+12} ${(nowtime.getHours())}:${(nowtime.getMinutes())}:${(nowtime.getSeconds())}`)
+            // // let endtime = new Date(`2023/12/${(nowtime.getDay())+12} ${(nowtime.getHours())}:${(nowtime.getMinutes()+5)}:${(nowtime.getSeconds())}`);  //定义结束时间
+            // // let thon = 1000
+            // setInterval(function(){
+            //     if(showtime()=="4:50"){
+            //         thon = 0
+            //     }
+            //     selection_lists[0].innerHTML = showtime()
+            //     // console.log(showtime().stratime)
+            // },1000)
+            // setTimeout(function(){
+            //     choose[0].innerText = "Relax"
+            //     body.style.backgroundColor = "#ffffff"
+            //     // let clock = new Date
+            //     // let old_time = clock.toString()
+            //     // // let hours = clock.getHours()
+            //     // let minters = clock.getMinutes()
+            //     // let timer = "5:00"
+            // },300000)
+        })
+    </script>
+</body>
+</html>
